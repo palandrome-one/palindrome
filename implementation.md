@@ -17,7 +17,7 @@ Company landing page for **Palindrome Blockchain Consultancy** (palindrome.one) 
 | Language    | TypeScript 5                        |
 | UI          | React 19, custom CSS (no component library) |
 | Styling     | Tailwind CSS 4 (imported but primarily custom CSS in `globals.css`) |
-| Deployment  | TBD                                 |
+| Deployment  | Vercel (auto-deploy from GitHub)    |
 | Repo        | `palindrome/` subdirectory, GitHub: palandrome-one/palindrome |
 
 ---
@@ -81,7 +81,8 @@ palindrome.one/
 ### To Do
 - [ ] Add mobile hamburger menu (nav links hidden on mobile with no toggle)
 - [ ] Add logo/wordmark asset (currently text-only brand)
-- [ ] Configure deployment (Vercel, Cloudflare Pages, etc.)
+- [x] Configure deployment (Vercel, auto-deploy from GitHub)
+- [x] Point root domain to Vercel (A record → 76.76.21.21)
 - [ ] Add SEO metadata (Open Graph, Twitter cards, structured data)
 - [ ] Add favicon / apple-touch-icon assets
 - [ ] Bring `docs/landing-page.html` into git or remove it
@@ -99,6 +100,20 @@ palindrome.one/
 - **Email:** Namecheap Private Email (MX: mx1/mx2.privateemail.com)
 - **Webmail:** https://privateemail.com
 - **Catch-all:** All unmatched @palindrome.one addresses forward to william.mallett@palindrome.one
+
+### DNS Records
+
+| Type | Host | Value | TTL |
+|------|------|-------|-----|
+| A | @ | 76.76.21.21 (Vercel) | Automatic |
+| A | automation | 178.128.85.53 (DigitalOcean) | Automatic |
+| CNAME | www | cname.vercel-dns.com. | 30 min |
+| TXT | default._domainkey | DKIM key (Private Email) | 30 min |
+
+**Routing:**
+- `palindrome.one` → Vercel → 307 redirect to `www.palindrome.one`
+- `www.palindrome.one` → Vercel → Next.js site (primary domain)
+- `automation.palindrome.one` → DigitalOcean → Traefik → n8n
 
 ### n8n Automation Platform
 - **URL:** https://automation.palindrome.one
