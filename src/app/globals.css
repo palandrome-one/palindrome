@@ -685,6 +685,125 @@ body {
   }
 }
 
+/* ===== N8N CHAT WIDGET THEME ===== */
+:root {
+  --chat--color-primary: #0066ff;
+  --chat--color-primary-shade-50: #0055dd;
+  --chat--color-primary-shade-100: #0044bb;
+  --chat--color-secondary: #00ffff;
+  --chat--color-secondary-shade-50: #00cccc;
+  --chat--color-white: #ffffff;
+  --chat--color-light: #1e1e1e;
+  --chat--color-light-shade-50: #161616;
+  --chat--color-medium: rgba(255, 255, 255, 0.5);
+  --chat--color-dark: #ffffff;
+  --chat--color-disabled: rgba(255, 255, 255, 0.3);
+  --chat--color-typing: rgba(0, 255, 255, 0.6);
+  --chat--window--width: 400px;
+  --chat--window--height: 600px;
+  --chat--border-radius: 12px;
+  --chat--message--font-size: 0.9rem;
+  --chat--toggle--background: linear-gradient(135deg, #0066ff, #00ffff);
+  --chat--toggle--hover--background: linear-gradient(135deg, #0055dd, #00cccc);
+  --chat--toggle--active--background: linear-gradient(135deg, #0044bb, #00bbbb);
+  --chat--message--bot--background: rgba(0, 102, 255, 0.08);
+  --chat--message--user--background: linear-gradient(135deg, #0066ff, #0088ff);
+  --chat--button--background: linear-gradient(135deg, #0066ff, #00ffff);
+  --chat--button--hover--background: linear-gradient(135deg, #0055dd, #00cccc);
+  --chat--header-height: 64px;
+  --chat--textarea--height: 48px;
+}
+
+.n8n-chat .chat-window {
+  font-family: 'DejaVu Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  background: #0d0d2b;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+.n8n-chat .chat-header {
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.15), rgba(0, 255, 255, 0.08));
+  border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+}
+
+.n8n-chat .chat-header .chat-title {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.n8n-chat .chat-header .chat-subtitle {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+}
+
+.n8n-chat .chat-message-markdown {
+  font-family: 'DejaVu Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+}
+
+.n8n-chat .chat-message.chat-message-from-bot .chat-message-body {
+  background: rgba(0, 102, 255, 0.08);
+  border: 1px solid rgba(0, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+  border-radius: 12px 12px 12px 2px;
+}
+
+.n8n-chat .chat-message.chat-message-from-user .chat-message-body {
+  background: linear-gradient(135deg, #0066ff, #0088ff);
+  color: #ffffff;
+  border-radius: 12px 12px 2px 12px;
+}
+
+.n8n-chat .chat-input {
+  background: rgba(0, 102, 255, 0.06);
+  border: 1px solid rgba(0, 255, 255, 0.15);
+  border-radius: 8px;
+  color: #ffffff;
+}
+
+.n8n-chat .chat-input textarea {
+  color: #ffffff;
+  font-family: 'DejaVu Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+}
+
+.n8n-chat .chat-input textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.n8n-chat .chat-input-send-button {
+  color: #00ffff;
+}
+
+.n8n-chat .chat-messages-list {
+  background: #0d0d2b;
+}
+
+.n8n-chat .chat-toggle {
+  box-shadow: 0 4px 20px rgba(0, 102, 255, 0.4);
+}
+
+.n8n-chat .chat-toggle:hover {
+  box-shadow: 0 6px 28px rgba(0, 255, 255, 0.4);
+}
+
+.n8n-chat .chat-new-session-button {
+  background: linear-gradient(135deg, #0066ff, #00ffff);
+  color: #1e1e1e;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+}
+
+.n8n-chat .chat-new-session-button:hover {
+  box-shadow: 0 4px 20px rgba(0, 102, 255, 0.4);
+}
+
+.n8n-chat .chat-initial-message {
+  background: rgba(0, 102, 255, 0.08);
+  border: 1px solid rgba(0, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+}
+
 /* ===== SCROLL REVEAL ===== */
 .reveal {
   opacity: 0;
