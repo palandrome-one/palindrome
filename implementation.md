@@ -74,7 +74,8 @@ palindrome.one/
 5. **Tech Stack** — 6-layer architecture breakdown (Infrastructure through Governance)
 6. **Advisory** — 6-card grid for strategy services (architecture, tokenomics, compliance, anti-cheat, creator economy, due diligence)
 7. **Differentiator** — Two-column "Not What We Do" vs "What We Deliver"
-8. **CTA** — Contact section with email link
+8. **About / Team** — Company narrative + founder bio card (gradient-bordered avatar, role, bio). Responsive: cards stack on mobile.
+9. **CTA** — Contact section with email link
 9. **Footer** — Shared footer with brand link, copyright 2026, nav links, Case Studies link
 
 ### Case Studies (`/case-studies`)
@@ -120,7 +121,7 @@ palindrome.one/
 - [ ] Add favicon / apple-touch-icon assets
 - [ ] Bring `docs/landing-page.html` into git or remove it
 - [ ] Add analytics integration
-- [ ] Consider adding team / about section
+- [x] Add About / Team section with founder bio (between Differentiator and CTA)
 
 ---
 
