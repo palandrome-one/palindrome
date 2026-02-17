@@ -290,6 +290,33 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ABOUT */}
+      <section id="about" className="section">
+        <div className="section-label reveal">Who We Are</div>
+        <h2 className="section-title reveal">
+          Built by Practitioners,<br />Not Pitchmen
+        </h2>
+        <p className="section-desc reveal">
+          Palindrome was founded on a simple conviction: blockchain gaming needs engineers who&apos;ve
+          actually shipped infrastructure, not consultants recycling pitch decks. We bring
+          institutional-grade architecture thinking to studios, funds, and platforms building
+          economies designed to last decades.
+        </p>
+
+        <div className="about-team">
+          <div className="about-card reveal">
+            <div className="about-avatar">WM</div>
+            <h3>William Mallett</h3>
+            <span className="about-role">Founder &amp; Principal</span>
+            <p>
+              Systems architect with deep roots in blockchain infrastructure and game economy
+              design. William has led technical strategy for sovereign gaming chains, tokenomics
+              audits, and cross-chain marketplace builds across enterprise and indie studios alike.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section id="contact" className="cta-section">
         <div className="cta-content">
