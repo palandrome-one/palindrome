@@ -142,7 +142,7 @@ export default function Home() {
 
       {/* NAV */}
       <nav className="nav">
-        <div className="nav-brand">{"\u26D3"} CHAINSCORE LABS</div>
+        <div className="nav-brand">PALINDROME BLOCKCHAIN CONSULTANCY</div>
         <ul className="nav-links">
           <li><a href="#services">Build</a></li>
           <li><a href="#stack">Stack</a></li>
@@ -320,7 +320,7 @@ export default function Home() {
             enterprise planning a Web3 pivot &mdash; we&apos;d like to hear from you.
           </p>
           <div className="hero-buttons reveal">
-            <a href="mailto:hello@chainscorelabs.com" className="btn-primary">Contact Us</a>
+            <a href="mailto:hello@palindrome.one" className="btn-primary">Contact Us</a>
             <a href="#services" className="btn-outline">Review Services</a>
           </div>
         </div>
@@ -329,8 +329,8 @@ export default function Home() {
       {/* FOOTER */}
       <footer className="footer">
         <div className="footer-inner">
-          <div className="footer-brand">{"\u26D3"} CHAINSCORE LABS</div>
-          <p className="footer-text">&copy; 2025 ChainScore Labs. Powered by Theme Factory &middot; Tech Innovation Theme</p>
+          <div className="footer-brand">PALINDROME BLOCKCHAIN CONSULTANCY</div>
+          <p className="footer-text">&copy; 2025 Palindrome Blockchain Consultancy. Powered by Theme Factory &middot; Tech Innovation Theme</p>
           <ul className="footer-links">
             <li><a href="#services">Services</a></li>
             <li><a href="#advisory">Advisory</a></li>
