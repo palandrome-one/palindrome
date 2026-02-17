@@ -767,6 +767,7 @@ body {
 
 .chat-input textarea {
   color: #ffffff !important;
+  background: transparent !important;
   font-family: 'DejaVu Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif !important;
 }
 
