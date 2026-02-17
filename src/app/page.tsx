@@ -2,6 +2,8 @@ import Particles from "@/components/Particles";
 import ScrollReveal from "@/components/ScrollReveal";
 import NavScrollEffect from "@/components/NavScrollEffect";
 import SmoothScroll from "@/components/SmoothScroll";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 
 const services = [
   {
@@ -140,17 +142,7 @@ export default function Home() {
       <NavScrollEffect />
       <SmoothScroll />
 
-      {/* NAV */}
-      <nav className="nav">
-        <div className="nav-brand">PALINDROME BLOCKCHAIN CONSULTANCY</div>
-        <ul className="nav-links">
-          <li><a href="#services">Build</a></li>
-          <li><a href="#stack">Stack</a></li>
-          <li><a href="#advisory">Advisory</a></li>
-          <li><a href="#approach">Approach</a></li>
-          <li><a href="#contact" className="nav-cta">Get in Touch</a></li>
-        </ul>
-      </nav>
+      <Nav />
 
       {/* HERO */}
       <section className="hero">
@@ -169,8 +161,8 @@ export default function Home() {
             app-chains and gasless execution to anti-cheat integrity and autonomous worlds.
           </p>
           <div className="hero-buttons">
-            <a href="#services" className="btn-primary">Explore Services</a>
-            <a href="#advisory" className="btn-outline">Advisory &amp; Strategy</a>
+            <a href="/#services" className="btn-primary">Explore Services</a>
+            <a href="/#advisory" className="btn-outline">Advisory &amp; Strategy</a>
           </div>
         </div>
 
@@ -321,23 +313,12 @@ export default function Home() {
           </p>
           <div className="hero-buttons reveal">
             <a href="mailto:hello@palindrome.one" className="btn-primary">Contact Us</a>
-            <a href="#services" className="btn-outline">Review Services</a>
+            <a href="/#services" className="btn-outline">Review Services</a>
           </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="footer-inner">
-          <div className="footer-brand">PALINDROME BLOCKCHAIN CONSULTANCY</div>
-          <p className="footer-text">&copy; 2025 Palindrome Blockchain Consultancy. Powered by Theme Factory &middot; Tech Innovation Theme</p>
-          <ul className="footer-links">
-            <li><a href="#services">Services</a></li>
-            <li><a href="#advisory">Advisory</a></li>
-            <li><a href="#stack">Tech Stack</a></li>
-          </ul>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }

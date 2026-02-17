@@ -30,6 +30,7 @@ export default function ChatWidget() {
             closeButtonTooltip: 'Close Chat',
           },
         },
+        enableStreaming: true,
         metadata: {},
       });
     `;
