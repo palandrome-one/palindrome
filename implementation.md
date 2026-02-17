@@ -36,7 +36,7 @@ palindrome.one/
 │   │   │   ├── globals.css      # Full custom stylesheet (~1000 lines)
 │   │   │   └── favicon.ico
 │   │   └── components/
-│   │       ├── Nav.tsx          # Shared nav (used on all pages)
+│   │       ├── Nav.tsx          # Shared nav with mobile hamburger menu (client component)
 │   │       ├── Footer.tsx       # Shared footer (used on all pages)
 │   │       ├── Particles.tsx    # Floating particle animation (hero)
 │   │       ├── ScrollReveal.tsx # Intersection Observer reveal animations
@@ -57,7 +57,7 @@ palindrome.one/
 - **Design system:** Custom CSS variables in `:root` define the "Tech Innovation" theme (electric blue / neon cyan on dark backgrounds). No Tailwind utilities used in practice — all styling is hand-written in `globals.css`.
 - **Navigation:** All section links use `/#section` format (absolute paths) so they work from any page. `SmoothScroll.tsx` handles both `#hash` and `/#hash` formats — smooth-scrolls on the homepage, normal navigation from other pages.
 - **Animations:** CSS-based scroll reveals (`.reveal` class + Intersection Observer), particle effects, gradient shifting, and hover transitions.
-- **Responsive:** Single breakpoint at 768px. Nav links hidden on mobile (no hamburger menu yet).
+- **Responsive:** Single breakpoint at 768px. Mobile hamburger menu toggles a fullscreen nav overlay.
 - **AI Chat:** n8n-powered chat widget with streaming responses (`enableStreaming: true` in widget, `responseMode: "streaming"` on Chat Trigger node).
 - **Static HTML mirror:** `docs/landing-page.html` is a standalone HTML copy of the same design, not tracked in git.
 
@@ -67,7 +67,7 @@ palindrome.one/
 
 ### Homepage (`/`)
 
-1. **Nav** — Shared fixed top bar with gradient brand link, section links, Case Studies link, CTA button
+1. **Nav** — Shared fixed top bar with gradient brand link, section links, Case Studies link, CTA button. Mobile: hamburger toggle opens fullscreen overlay with centered links; closes on link tap, Escape key, or overlay click. Hamburger animates to X when open.
 2. **Hero** — Full-viewport with particle animation, hex grid overlay, tagline, and dual CTAs
 3. **Stats Bar** — 4-column market stats (gaming market size, CAGR, etc.)
 4. **Services** — 9-card grid covering L3 infra, wallets, game engine integration, marketplaces, tokenomics, anti-cheat, AI agents, spatial computing, governance
@@ -114,7 +114,7 @@ palindrome.one/
 - [x] Update SmoothScroll to handle /#hash links across pages
 
 ### To Do
-- [ ] Add mobile hamburger menu (nav links hidden on mobile with no toggle)
+- [x] Add mobile hamburger menu with fullscreen overlay
 - [ ] Add logo/wordmark asset (currently text-only brand)
 - [ ] Add SEO metadata (Open Graph, Twitter cards, structured data)
 - [ ] Add favicon / apple-touch-icon assets
