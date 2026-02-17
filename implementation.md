@@ -89,3 +89,40 @@ palindrome.one/
 - [ ] Add analytics integration
 - [ ] Consider adding case studies / portfolio section
 - [ ] Consider adding team / about section
+
+---
+
+## Infrastructure
+
+### Domain & Email
+- **Registrar:** Namecheap (registrar-servers.com nameservers)
+- **Email:** Namecheap Private Email (MX: mx1/mx2.privateemail.com)
+- **Webmail:** https://privateemail.com
+- **Catch-all:** All unmatched @palindrome.one addresses forward to william.mallett@palindrome.one
+
+### n8n Automation Platform
+- **URL:** https://automation.palindrome.one
+- **Version:** 2.4.5
+- **License:** Community Edition Registered (free tier with selected paid features)
+- **Login:** admin@palindrome.one
+
+### Server (178.128.85.53)
+- **Provider:** DigitalOcean
+- **Reverse proxy:** Traefik v2.11 (TLS via Let's Encrypt)
+- **Container runtime:** Docker Compose
+- **Tenant config:** `/opt/myownip/tenants/palindrome-one/`
+
+#### n8n Environment Configuration
+
+Required env vars for n8n behind Traefik (in tenant `.env`):
+
+```
+N8N_HOST=automation.palindrome.one
+N8N_PORT=5678
+N8N_PROTOCOL=https
+N8N_WEBHOOK_BASE_URL=https://automation.palindrome.one
+N8N_EDITOR_BASE_URL=https://automation.palindrome.one
+N8N_PROXY_HOPS=1
+```
+
+**Critical:** Without `N8N_WEBHOOK_BASE_URL` and `N8N_PROXY_HOPS`, webhooks will return 404 even when workflows are active. n8n defaults to `host:5678` internally, but Traefik serves on port 443. `WEBHOOK_URL` (without `N8N_` prefix) does not work — must use `N8N_WEBHOOK_BASE_URL`.
