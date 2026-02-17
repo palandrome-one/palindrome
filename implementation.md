@@ -30,14 +30,19 @@ palindrome.one/
 │   ├── src/
 │   │   ├── app/
 │   │   │   ├── layout.tsx       # Root layout, metadata
-│   │   │   ├── page.tsx         # Single-page landing (all sections)
-│   │   │   ├── globals.css      # Full custom stylesheet (~700 lines)
+│   │   │   ├── page.tsx         # Homepage (all sections)
+│   │   │   ├── case-studies/
+│   │   │   │   └── page.tsx     # Case studies / portfolio page
+│   │   │   ├── globals.css      # Full custom stylesheet (~1000 lines)
 │   │   │   └── favicon.ico
 │   │   └── components/
+│   │       ├── Nav.tsx          # Shared nav (used on all pages)
+│   │       ├── Footer.tsx       # Shared footer (used on all pages)
 │   │       ├── Particles.tsx    # Floating particle animation (hero)
 │   │       ├── ScrollReveal.tsx # Intersection Observer reveal animations
 │   │       ├── NavScrollEffect.tsx # Nav background on scroll
-│   │       └── SmoothScroll.tsx # Smooth scroll behavior
+│   │       ├── SmoothScroll.tsx # Smooth scroll (handles #hash and /#hash)
+│   │       └── ChatWidget.tsx   # n8n AI chat widget (streaming enabled)
 │   └── package.json
 ├── docs/
 │   └── landing-page.html        # Static HTML version (outside git)
@@ -48,17 +53,21 @@ palindrome.one/
 
 ## Architecture Notes
 
-- **Single-page app:** All content lives in `page.tsx` as a server component with client-side interactive components extracted into `src/components/`.
+- **Multi-page app:** Homepage (`page.tsx`) and Case Studies (`case-studies/page.tsx`). Shared Nav and Footer components extracted for cross-page reuse.
 - **Design system:** Custom CSS variables in `:root` define the "Tech Innovation" theme (electric blue / neon cyan on dark backgrounds). No Tailwind utilities used in practice — all styling is hand-written in `globals.css`.
+- **Navigation:** All section links use `/#section` format (absolute paths) so they work from any page. `SmoothScroll.tsx` handles both `#hash` and `/#hash` formats — smooth-scrolls on the homepage, normal navigation from other pages.
 - **Animations:** CSS-based scroll reveals (`.reveal` class + Intersection Observer), particle effects, gradient shifting, and hover transitions.
 - **Responsive:** Single breakpoint at 768px. Nav links hidden on mobile (no hamburger menu yet).
+- **AI Chat:** n8n-powered chat widget with streaming responses (`enableStreaming: true` in widget, `responseMode: "streaming"` on Chat Trigger node).
 - **Static HTML mirror:** `docs/landing-page.html` is a standalone HTML copy of the same design, not tracked in git.
 
 ---
 
 ## Current Site Sections
 
-1. **Nav** — Fixed top bar with gradient brand name, section links, CTA button
+### Homepage (`/`)
+
+1. **Nav** — Shared fixed top bar with gradient brand link, section links, Case Studies link, CTA button
 2. **Hero** — Full-viewport with particle animation, hex grid overlay, tagline, and dual CTAs
 3. **Stats Bar** — 4-column market stats (gaming market size, CAGR, etc.)
 4. **Services** — 9-card grid covering L3 infra, wallets, game engine integration, marketplaces, tokenomics, anti-cheat, AI agents, spatial computing, governance
@@ -66,7 +75,25 @@ palindrome.one/
 6. **Advisory** — 6-card grid for strategy services (architecture, tokenomics, compliance, anti-cheat, creator economy, due diligence)
 7. **Differentiator** — Two-column "Not What We Do" vs "What We Deliver"
 8. **CTA** — Contact section with email link
-9. **Footer** — Brand, copyright, nav links
+9. **Footer** — Shared footer with brand link, copyright 2026, nav links, Case Studies link
+
+### Case Studies (`/case-studies`)
+
+1. **Nav** — Shared component
+2. **Compact Hero** — "Infrastructure That Delivers" (no particles, shorter than homepage)
+3. **Overview Cards Grid** — 5 cards (2-col desktop, 1-col mobile) with badges, tech tags, anchor links
+4. **Case Study Detail Sections** (x5) — Each with challenge block (red border), solution block (cyan border), tech tags, 4-metric results grid
+5. **CTA** — "Ready to Build Something Like This?"
+6. **Footer** — Shared component
+
+**Case Studies:**
+| # | Title | Type |
+|---|-------|------|
+| 1 | Sovereign Gaming Chain for a AAA Studio | Client Engagement |
+| 2 | Invisible Onboarding for an Indie Battle Royale | Client Engagement |
+| 3 | Cross-Chain Marketplace Infrastructure | Capability Showcase |
+| 4 | Sustainable Dual-Token Economy Engine | Client Engagement |
+| 5 | ZK-Verified Anti-Cheat for Competitive Esports | Capability Showcase |
 
 ---
 
@@ -77,18 +104,22 @@ palindrome.one/
 - [x] Extract client components (Particles, ScrollReveal, NavScrollEffect, SmoothScroll)
 - [x] Rebrand from ChainScore Labs to Palindrome Blockchain Consultancy
 - [x] Update contact email to hello@palindrome.one
+- [x] Configure deployment (Vercel, auto-deploy from GitHub)
+- [x] Point root domain to Vercel (A record → 76.76.21.21)
+- [x] Add n8n AI chat widget with Palindrome-themed dark styling
+- [x] Enable chat streaming (n8n Chat Trigger + widget `enableStreaming`)
+- [x] Add case studies / portfolio page (5 case studies)
+- [x] Extract shared Nav and Footer components
+- [x] Update copyright year to 2026
+- [x] Update SmoothScroll to handle /#hash links across pages
 
 ### To Do
 - [ ] Add mobile hamburger menu (nav links hidden on mobile with no toggle)
 - [ ] Add logo/wordmark asset (currently text-only brand)
-- [x] Configure deployment (Vercel, auto-deploy from GitHub)
-- [x] Point root domain to Vercel (A record → 76.76.21.21)
 - [ ] Add SEO metadata (Open Graph, Twitter cards, structured data)
 - [ ] Add favicon / apple-touch-icon assets
 - [ ] Bring `docs/landing-page.html` into git or remove it
-- [ ] Update copyright year from 2025 to 2026
 - [ ] Add analytics integration
-- [ ] Consider adding case studies / portfolio section
 - [ ] Consider adding team / about section
 
 ---
@@ -141,3 +172,12 @@ N8N_PROXY_HOPS=1
 ```
 
 **Critical:** Without `N8N_WEBHOOK_BASE_URL` and `N8N_PROXY_HOPS`, webhooks will return 404 even when workflows are active. n8n defaults to `host:5678` internally, but Traefik serves on port 443. `WEBHOOK_URL` (without `N8N_` prefix) does not work — must use `N8N_WEBHOOK_BASE_URL`.
+
+### n8n AI Chat Workflow
+
+- **Workflow:** "Palindrome AI Consultant — Phase 2 RAG" (ID: `VSfRJMBluwcJLfrn`)
+- **Chat Trigger:** Embedded webhook mode, streaming enabled (`options.responseMode: "streaming"`)
+- **Agent:** GPT-4o with system prompt covering all Palindrome services, tech stack, and advisory
+- **Memory:** Window Buffer Memory (20 messages)
+- **RAG:** Qdrant vector store (`palindrome_docs` collection) with OpenAI embeddings, exposed as agent tool
+- **Widget:** `@n8n/chat` v1.9.0 via CDN, `enableStreaming: true` in `createChat()` config
