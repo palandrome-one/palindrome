@@ -15,7 +15,7 @@ export default function ChatWidget() {
     script.textContent = `
       import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
       createChat({
-        webhookUrl: 'https://automation.palindrome.one/webhook/6c2a2ece-3755-4843-b7e1-916ca8c1f655/chat',
+        webhookUrl: 'https://automation.palindrome.one/webhook/ed2036ec-5985-4d7d-8dca-94e769954173/chat',
         mode: 'window',
         showWelcomeScreen: false,
         initialMessages: [
