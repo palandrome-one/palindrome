@@ -17,6 +17,7 @@ Company landing page for **Palindrome Blockchain Consultancy** (palindrome.one) 
 | Language    | TypeScript 5                        |
 | UI          | React 19, custom CSS (no component library) |
 | Styling     | Tailwind CSS 4 (imported but primarily custom CSS in `globals.css`) |
+| Analytics   | Vercel Web Analytics (`@vercel/analytics`) |
 | Deployment  | Vercel (auto-deploy from GitHub)    |
 | Repo        | `palindrome/` subdirectory, GitHub: palandrome-one/palindrome |
 
@@ -29,7 +30,7 @@ palindrome.one/
 ├── palindrome/                  # Next.js app (git repo root)
 │   ├── src/
 │   │   ├── app/
-│   │   │   ├── layout.tsx       # Root layout, metadata
+│   │   │   ├── layout.tsx       # Root layout, metadata, Analytics
 │   │   │   ├── page.tsx         # Homepage (all sections)
 │   │   │   ├── case-studies/
 │   │   │   │   └── page.tsx     # Case studies / portfolio page
@@ -120,7 +121,7 @@ palindrome.one/
 - [ ] Add SEO metadata (Open Graph, Twitter cards, structured data)
 - [ ] Add favicon / apple-touch-icon assets
 - [ ] Bring `docs/landing-page.html` into git or remove it
-- [ ] Add analytics integration
+- [x] Add analytics integration (Vercel Analytics)
 - [x] Add About / Team section with founder bio (between Differentiator and CTA)
 
 ---
