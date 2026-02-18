@@ -1,0 +1,623 @@
+{
+  "quote": {
+    "id": "PBC-Q-2026-001",
+    "version": "1.0",
+    "date_issued": "2026-02-18",
+    "valid_until": "2026-03-18",
+    "prepared_by": "Palindrome Blockchain Consultancy",
+    "client": null,
+    "status": "draft"
+  },
+  "project": {
+    "name": "Palindrome Blockchain Consultancy — Website & AI Platform",
+    "repo": "palandrome-one/palindrome",
+    "live_url": "https://www.palindrome.one",
+    "automation_url": "https://automation.palindrome.one",
+    "stack": {
+      "framework": "Next.js 16.1.6 (App Router)",
+      "language": "TypeScript 5",
+      "ui": "React 19",
+      "styling": "Custom CSS (globals.css)",
+      "analytics": "Vercel Web Analytics",
+      "deployment": "Vercel (auto-deploy from GitHub)",
+      "ai_agent": "GPT-4o via n8n",
+      "vector_db": "Qdrant (self-hosted)",
+      "embeddings": "OpenAI text-embedding-3-small",
+      "automation": "n8n 2.4.5 (Community Edition)",
+      "reverse_proxy": "Traefik v2.11"
+    }
+  },
+  "codebase_metrics": {
+    "total_files_changed": 19,
+    "total_lines_added": 2589,
+    "total_lines_deleted": 87,
+    "source_lines": 2436,
+    "files": [
+      {
+        "path": "src/app/globals.css",
+        "lines": 1250,
+        "category": "styling",
+        "description": "Complete design system: CSS variables, animations, scroll reveals, responsive layouts"
+      },
+      {
+        "path": "src/app/page.tsx",
+        "lines": 353,
+        "category": "page",
+        "description": "Homepage — Hero, services, tech stack, advisory, differentiator, about, CTA"
+      },
+      {
+        "path": "src/app/case-studies/page.tsx",
+        "lines": 280,
+        "category": "page",
+        "description": "Case studies page — 5 case studies with challenge/solution/metrics"
+      },
+      {
+        "path": "implementation.md",
+        "lines": 189,
+        "category": "documentation",
+        "description": "Technical specification, architecture notes, task tracker"
+      },
+      {
+        "path": "src/components/JsonLd.tsx",
+        "lines": 167,
+        "category": "component-seo",
+        "description": "Organization, WebSite, ProfessionalService, CreativeWork JSON-LD schemas"
+      },
+      {
+        "path": "src/app/layout.tsx",
+        "lines": 62,
+        "category": "layout",
+        "description": "Root layout, metadata, OG/Twitter cards, Analytics, JSON-LD"
+      },
+      {
+        "path": "src/components/Nav.tsx",
+        "lines": 61,
+        "category": "component",
+        "description": "Fixed nav with gradient brand, section links, mobile hamburger overlay"
+      },
+      {
+        "path": "src/components/ChatWidget.tsx",
+        "lines": 46,
+        "category": "component-ai",
+        "description": "n8n AI chat widget with streaming and dark theme"
+      },
+      {
+        "path": "src/components/SmoothScroll.tsx",
+        "lines": 35,
+        "category": "component-ux",
+        "description": "Smooth scroll handling for #hash and /#hash links across pages"
+      },
+      {
+        "path": "src/components/Particles.tsx",
+        "lines": 29,
+        "category": "component-animation",
+        "description": "Floating particle animation for hero section"
+      },
+      {
+        "path": "src/app/robots.ts",
+        "lines": 24,
+        "category": "seo",
+        "description": "robots.txt with 15 AI crawler permissions"
+      },
+      {
+        "path": "src/components/ScrollReveal.tsx",
+        "lines": 24,
+        "category": "component-animation",
+        "description": "Intersection Observer scroll reveal animations"
+      },
+      {
+        "path": "src/components/NavScrollEffect.tsx",
+        "lines": 22,
+        "category": "component-ux",
+        "description": "Nav background opacity on scroll"
+      },
+      {
+        "path": "src/app/sitemap.ts",
+        "lines": 18,
+        "category": "seo",
+        "description": "Dynamic sitemap.xml generation"
+      },
+      {
+        "path": "next.config.ts",
+        "lines": 18,
+        "category": "config",
+        "description": "Next.js config with X-Robots-Tag header"
+      },
+      {
+        "path": "src/components/Footer.tsx",
+        "lines": 16,
+        "category": "component",
+        "description": "Shared footer with brand, copyright, nav links"
+      },
+      {
+        "path": "public/og-image.png",
+        "lines": null,
+        "category": "asset",
+        "description": "Open Graph image for social sharing"
+      },
+      {
+        "path": "package.json",
+        "lines": 1,
+        "category": "config",
+        "description": "Added @vercel/analytics dependency"
+      },
+      {
+        "path": "package-lock.json",
+        "lines": 39,
+        "category": "config",
+        "description": "Lock file for @vercel/analytics"
+      }
+    ],
+    "research_documents": [
+      {
+        "filename": "Blockchain Gaming_ Anti-Cheat, Monetization, and M....pdf",
+        "size_bytes": 187942,
+        "date": "2026-02-07"
+      },
+      {
+        "filename": "Blockchain Gaming Tech Stack Blueprint.pdf",
+        "size_bytes": 236588,
+        "date": "2026-02-10"
+      },
+      {
+        "filename": "Blockchain Gaming Market Opportunity Analysis.pdf",
+        "size_bytes": 349924,
+        "date": "2026-02-12"
+      },
+      {
+        "filename": "Gaming_Rails_Global_Finance.pdf",
+        "size_bytes": 17888153,
+        "date": "2026-02-13"
+      }
+    ],
+    "infrastructure_assets": [
+      {
+        "name": "Static prototype",
+        "path": "docs/landing-page.html",
+        "size_bytes": 39408
+      },
+      {
+        "name": "n8n Chat Workflow",
+        "id": "VSfRJMBluwcJLfrn",
+        "type": "n8n_workflow"
+      },
+      {
+        "name": "n8n Ingestion Workflow",
+        "id": "OF4GFhKaQk7vwuGN",
+        "type": "n8n_workflow"
+      },
+      {
+        "name": "Qdrant Collection",
+        "collection": "palindrome_docs",
+        "chunks": 129,
+        "dimensions": 1536,
+        "similarity": "cosine"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "id": "research",
+      "name": "Research, Strategy & Content",
+      "hours": 12,
+      "status": "completed",
+      "items": [
+        {
+          "name": "Market opportunity analysis",
+          "hours": 3,
+          "files": ["docs/Blockchain Gaming Market Opportunity Analysis.pdf"],
+          "status": "completed"
+        },
+        {
+          "name": "Tech stack blueprint",
+          "hours": 3,
+          "files": ["docs/Blockchain Gaming Tech Stack Blueprint.pdf"],
+          "status": "completed"
+        },
+        {
+          "name": "Anti-cheat & monetization research",
+          "hours": 2,
+          "files": ["docs/Blockchain Gaming_ Anti-Cheat, Monetization, and M....pdf"],
+          "status": "completed"
+        },
+        {
+          "name": "Global finance infrastructure",
+          "hours": 2,
+          "files": ["docs/Gaming_Rails_Global_Finance.pdf"],
+          "status": "completed"
+        },
+        {
+          "name": "Service definition (9 services)",
+          "hours": 1,
+          "files": ["src/app/page.tsx"],
+          "status": "completed"
+        },
+        {
+          "name": "Advisory framework (6 specializations)",
+          "hours": 1,
+          "files": ["src/app/page.tsx"],
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "architecture",
+      "name": "Architecture & Scaffolding",
+      "hours": 3,
+      "status": "completed",
+      "items": [
+        {
+          "name": "Technology selection",
+          "hours": 1,
+          "files": ["package.json", "next.config.ts"],
+          "status": "completed"
+        },
+        {
+          "name": "Application structure",
+          "hours": 1,
+          "files": ["src/app/layout.tsx"],
+          "status": "completed"
+        },
+        {
+          "name": "Design system",
+          "hours": 1,
+          "files": ["src/app/globals.css"],
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "frontend",
+      "name": "Frontend Development",
+      "hours": 14,
+      "status": "completed",
+      "items": [
+        {
+          "name": "Homepage",
+          "hours": 4,
+          "files": ["src/app/page.tsx"],
+          "status": "completed"
+        },
+        {
+          "name": "Case studies page",
+          "hours": 3,
+          "files": ["src/app/case-studies/page.tsx"],
+          "status": "completed"
+        },
+        {
+          "name": "Global stylesheet",
+          "hours": 3,
+          "files": ["src/app/globals.css"],
+          "status": "completed"
+        },
+        {
+          "name": "Navigation component",
+          "hours": 1,
+          "files": ["src/components/Nav.tsx"],
+          "status": "completed"
+        },
+        {
+          "name": "Chat widget",
+          "hours": 1,
+          "files": ["src/components/ChatWidget.tsx"],
+          "status": "completed"
+        },
+        {
+          "name": "JSON-LD structured data",
+          "hours": 0.5,
+          "files": ["src/components/JsonLd.tsx"],
+          "status": "completed"
+        },
+        {
+          "name": "Layout & metadata",
+          "hours": 0.5,
+          "files": ["src/app/layout.tsx"],
+          "status": "completed"
+        },
+        {
+          "name": "Utility components",
+          "hours": 1,
+          "files": [
+            "src/components/Particles.tsx",
+            "src/components/ScrollReveal.tsx",
+            "src/components/NavScrollEffect.tsx",
+            "src/components/SmoothScroll.tsx"
+          ],
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "devops",
+      "name": "DevOps & Infrastructure",
+      "hours": 6,
+      "status": "completed",
+      "items": [
+        {
+          "name": "Domain & DNS configuration",
+          "hours": 1.5,
+          "files": [],
+          "status": "completed",
+          "notes": "4 DNS records: A (x2), CNAME, TXT (DKIM)"
+        },
+        {
+          "name": "Email infrastructure",
+          "hours": 1,
+          "files": [],
+          "status": "completed",
+          "notes": "Namecheap Private Email + DKIM + catch-all"
+        },
+        {
+          "name": "Vercel deployment",
+          "hours": 1,
+          "files": [],
+          "status": "completed",
+          "notes": "GitHub auto-deploy, domain binding, SSL"
+        },
+        {
+          "name": "DigitalOcean server",
+          "hours": 1.5,
+          "files": [],
+          "status": "completed",
+          "notes": "Docker Compose + Traefik v2.11 + Let's Encrypt"
+        },
+        {
+          "name": "Environment configuration",
+          "hours": 1,
+          "files": [],
+          "status": "completed",
+          "notes": "N8N_WEBHOOK_BASE_URL, N8N_PROXY_HOPS, N8N_EDITOR_BASE_URL"
+        }
+      ]
+    },
+    {
+      "id": "ai_chatbot",
+      "name": "AI Chatbot (RAG Pipeline)",
+      "hours": 10,
+      "status": "completed",
+      "items": [
+        {
+          "name": "n8n workflow platform",
+          "hours": 2,
+          "files": [],
+          "status": "completed",
+          "notes": "Traefik routing, SSL, container deployment"
+        },
+        {
+          "name": "AI agent configuration",
+          "hours": 2,
+          "files": [],
+          "status": "completed",
+          "notes": "GPT-4o agent with comprehensive system prompt"
+        },
+        {
+          "name": "Vector search (RAG)",
+          "hours": 2,
+          "files": [],
+          "status": "completed",
+          "notes": "Qdrant: palindrome_docs, 129 chunks, 1536-dim, cosine"
+        },
+        {
+          "name": "PDF ingestion pipeline",
+          "hours": 1.5,
+          "files": [],
+          "status": "completed",
+          "notes": "Workflow OF4GFhKaQk7vwuGN"
+        },
+        {
+          "name": "Chat widget integration",
+          "hours": 1,
+          "files": ["src/components/ChatWidget.tsx"],
+          "status": "completed"
+        },
+        {
+          "name": "Webhook debugging (3 bugs)",
+          "hours": 1.5,
+          "files": [],
+          "status": "completed",
+          "notes": "N8N_WEBHOOK_BASE_URL 404, Chat Trigger public property, textarea styling"
+        }
+      ]
+    },
+    {
+      "id": "seo_geo",
+      "name": "SEO/GEO & Performance",
+      "hours": 3,
+      "status": "completed",
+      "items": [
+        {
+          "name": "JSON-LD schemas (4)",
+          "hours": 1,
+          "files": ["src/components/JsonLd.tsx"],
+          "status": "completed"
+        },
+        {
+          "name": "AI crawler permissions (15 bots)",
+          "hours": 0.5,
+          "files": ["src/app/robots.ts"],
+          "status": "completed"
+        },
+        {
+          "name": "Open Graph & Twitter Cards",
+          "hours": 0.5,
+          "files": ["src/app/layout.tsx", "public/og-image.png"],
+          "status": "completed"
+        },
+        {
+          "name": "Sitemap & robots.txt",
+          "hours": 0.5,
+          "files": ["src/app/sitemap.ts", "src/app/robots.ts"],
+          "status": "completed"
+        },
+        {
+          "name": "Analytics & headers",
+          "hours": 0.5,
+          "files": ["src/app/layout.tsx", "next.config.ts"],
+          "status": "completed"
+        }
+      ]
+    }
+  ],
+  "rates": {
+    "tiers": [
+      {
+        "name": "Cambodia / SEA",
+        "hourly_rate": 75,
+        "currency": "USD",
+        "fixed_bid_multiplier": 1.17,
+        "retainer_hours": 20,
+        "retainer_monthly": 1500
+      },
+      {
+        "name": "Australia",
+        "hourly_rate": 175,
+        "currency": "USD",
+        "fixed_bid_multiplier": 1.17,
+        "retainer_hours": 20,
+        "retainer_monthly": 3500
+      },
+      {
+        "name": "Global / US",
+        "hourly_rate": 250,
+        "currency": "USD",
+        "fixed_bid_multiplier": 1.17,
+        "retainer_hours": 20,
+        "retainer_monthly": 5000
+      }
+    ],
+    "emergency_multiplier": 1.5,
+    "scope_change_threshold_pct": 10
+  },
+  "infrastructure_costs": [
+    {
+      "service": "Vercel",
+      "tier": "Free",
+      "monthly": 0,
+      "annual": 0,
+      "passthrough": true,
+      "notes": "Auto-deploy, CDN, SSL"
+    },
+    {
+      "service": "DigitalOcean",
+      "tier": "Shared Droplet",
+      "monthly": 8,
+      "annual": 96,
+      "passthrough": true,
+      "notes": "Shared across tenants"
+    },
+    {
+      "service": "Namecheap Domain",
+      "tier": ".one TLD",
+      "monthly": 1,
+      "annual": 12,
+      "passthrough": true,
+      "notes": "Domain renewal"
+    },
+    {
+      "service": "Namecheap Private Email",
+      "tier": "Starter",
+      "monthly": 3,
+      "annual": 36,
+      "passthrough": true,
+      "notes": "1 mailbox + catch-all"
+    },
+    {
+      "service": "OpenAI API",
+      "tier": "Pay-as-you-go",
+      "monthly": 10,
+      "annual": 120,
+      "passthrough": true,
+      "notes": "GPT-4o + text-embedding-3-small"
+    },
+    {
+      "service": "n8n",
+      "tier": "Self-hosted (Community Edition)",
+      "monthly": 0,
+      "annual": 0,
+      "passthrough": false,
+      "notes": "Included in DigitalOcean cost"
+    },
+    {
+      "service": "Qdrant",
+      "tier": "Self-hosted (Docker)",
+      "monthly": 0,
+      "annual": 0,
+      "passthrough": false,
+      "notes": "Included in DigitalOcean cost"
+    }
+  ],
+  "payment_milestones": [
+    {
+      "id": "M1",
+      "name": "Research & Architecture",
+      "trigger": "Research docs + tech spec delivered",
+      "percentage": 30,
+      "status": "completed"
+    },
+    {
+      "id": "M2",
+      "name": "Development & Infrastructure",
+      "trigger": "Site live + AI chatbot operational",
+      "percentage": 40,
+      "status": "completed"
+    },
+    {
+      "id": "M3",
+      "name": "SEO/GEO & Handoff",
+      "trigger": "Final delivery + documentation",
+      "percentage": 30,
+      "status": "completed"
+    }
+  ],
+  "change_log": [
+    {
+      "version": "1.0",
+      "date": "2026-02-18",
+      "description": "Initial quote — complete project delivery",
+      "delta_hours": 48,
+      "delta_sections": 6
+    }
+  ],
+  "totals": {
+    "hours": 48,
+    "sections": 6,
+    "by_tier": {
+      "cambodia_sea": {
+        "hourly_rate": 75,
+        "tm_total": 3600,
+        "fixed_bid": 4200,
+        "retainer_monthly": 1500,
+        "infra_monthly": 22,
+        "infra_annual": 264
+      },
+      "australia": {
+        "hourly_rate": 175,
+        "tm_total": 8400,
+        "fixed_bid": 9800,
+        "retainer_monthly": 3500,
+        "infra_monthly": 22,
+        "infra_annual": 264
+      },
+      "global_us": {
+        "hourly_rate": 250,
+        "tm_total": 12000,
+        "fixed_bid": 14000,
+        "retainer_monthly": 5000,
+        "infra_monthly": 22,
+        "infra_annual": 264
+      }
+    }
+  },
+  "timeline": {
+    "research_phase": {
+      "start": "2026-02-07",
+      "end": "2026-02-13",
+      "deliverables": 4
+    },
+    "development_sprint": {
+      "start": "2026-02-17",
+      "end": "2026-02-18",
+      "commits": 20
+    }
+  }
+}
