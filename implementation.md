@@ -30,15 +30,18 @@ palindrome.one/
 ├── palindrome/                  # Next.js app (git repo root)
 │   ├── src/
 │   │   ├── app/
-│   │   │   ├── layout.tsx       # Root layout, metadata, Analytics
+│   │   │   ├── layout.tsx       # Root layout, metadata, OG/Twitter, Analytics, JsonLd
 │   │   │   ├── page.tsx         # Homepage (all sections)
 │   │   │   ├── case-studies/
 │   │   │   │   └── page.tsx     # Case studies / portfolio page
+│   │   │   ├── robots.ts        # robots.txt with AI crawler permissions
+│   │   │   ├── sitemap.ts       # sitemap.xml (both pages)
 │   │   │   ├── globals.css      # Full custom stylesheet (~1000 lines)
 │   │   │   └── favicon.ico
 │   │   └── components/
 │   │       ├── Nav.tsx          # Shared nav with mobile hamburger menu (client component)
 │   │       ├── Footer.tsx       # Shared footer (used on all pages)
+│   │       ├── JsonLd.tsx       # Organization, WebSite, ProfessionalService JSON-LD
 │   │       ├── Particles.tsx    # Floating particle animation (hero)
 │   │       ├── ScrollReveal.tsx # Intersection Observer reveal animations
 │   │       ├── NavScrollEffect.tsx # Nav background on scroll
@@ -61,6 +64,7 @@ palindrome.one/
 - **Responsive:** Single breakpoint at 768px. Mobile hamburger menu toggles a fullscreen nav overlay.
 - **AI Chat:** n8n-powered chat widget with streaming responses (`enableStreaming: true` in widget, `responseMode: "streaming"` on Chat Trigger node).
 - **Static HTML mirror:** `docs/landing-page.html` is a standalone HTML copy of the same design, not tracked in git.
+- **GEO (Generative Engine Optimization):** JSON-LD structured data (Organization, WebSite, ProfessionalService, CreativeWork), Open Graph + Twitter Card meta tags, canonical URLs, `robots.txt` with explicit AI crawler permissions (GPTBot, ClaudeBot, PerplexityBot, etc.), `sitemap.xml`, and `X-Robots-Tag` header with `max-snippet:-1` for unlimited AI text extraction. Semantic `<main>` and `<article>` wrappers help AI parsers distinguish content.
 
 ---
 
@@ -118,7 +122,7 @@ palindrome.one/
 ### To Do
 - [x] Add mobile hamburger menu with fullscreen overlay
 - [ ] Add logo/wordmark asset (currently text-only brand)
-- [ ] Add SEO metadata (Open Graph, Twitter cards, structured data)
+- [x] Add SEO/GEO metadata (Open Graph, Twitter Cards, JSON-LD structured data, robots.txt, sitemap.xml, X-Robots-Tag)
 - [ ] Add favicon / apple-touch-icon assets
 - [ ] Bring `docs/landing-page.html` into git or remove it
 - [x] Add analytics integration (Vercel Analytics)
