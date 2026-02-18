@@ -173,7 +173,7 @@
     "infrastructure_assets": [
       {
         "name": "Static prototype",
-        "path": "docs/landing-page.html",
+        "path": "palindrome/docs/landing-page.html",
         "size_bytes": 39408
       },
       {
@@ -205,25 +205,25 @@
         {
           "name": "Market opportunity analysis",
           "hours": 3,
-          "files": ["docs/Blockchain Gaming Market Opportunity Analysis.pdf"],
+          "files": ["palindrome/docs/Blockchain Gaming Market Opportunity Analysis.pdf"],
           "status": "completed"
         },
         {
           "name": "Tech stack blueprint",
           "hours": 3,
-          "files": ["docs/Blockchain Gaming Tech Stack Blueprint.pdf"],
+          "files": ["palindrome/docs/Blockchain Gaming Tech Stack Blueprint.pdf"],
           "status": "completed"
         },
         {
           "name": "Anti-cheat & monetization research",
           "hours": 2,
-          "files": ["docs/Blockchain Gaming_ Anti-Cheat, Monetization, and M....pdf"],
+          "files": ["palindrome/docs/Blockchain Gaming_ Anti-Cheat, Monetization, and M....pdf"],
           "status": "completed"
         },
         {
           "name": "Global finance infrastructure",
           "hours": 2,
-          "files": ["docs/Gaming_Rails_Global_Finance.pdf"],
+          "files": ["palindrome/docs/Gaming_Rails_Global_Finance.pdf"],
           "status": "completed"
         },
         {

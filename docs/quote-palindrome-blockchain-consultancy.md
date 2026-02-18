@@ -136,7 +136,7 @@ Palindrome Blockchain Consultancy engaged a full-stack development sprint to del
 
 | Asset | Description |
 |-------|-------------|
-| Static prototype | `docs/landing-page.html` (38K) — Initial HTML/CSS mockup |
+| Static prototype | `palindrome/docs/landing-page.html` (38K) — Initial HTML/CSS mockup |
 | n8n workflows | 2 workflows: Chat agent (`VSfRJMBluwcJLfrn`), PDF ingestion (`OF4GFhKaQk7vwuGN`) |
 | Qdrant collection | `palindrome_docs` — 129 chunks, 1536-dim cosine similarity |
 | DNS configuration | 4 records: A (x2), CNAME, TXT (DKIM) |
