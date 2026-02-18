@@ -1,7 +1,7 @@
 {
   "quote": {
     "id": "PBC-Q-2026-001",
-    "version": "1.0",
+    "version": "1.1",
     "date_issued": "2026-02-18",
     "valid_until": "2026-03-18",
     "prepared_by": "Palindrome Blockchain Consultancy",
@@ -21,6 +21,8 @@
       "analytics": "Vercel Web Analytics",
       "deployment": "Vercel (auto-deploy from GitHub)",
       "ai_agent": "GPT-4o via n8n",
+      "voice_stt": "OpenAI Whisper (whisper-1)",
+      "voice_tts": "OpenAI TTS (tts-1, voice: onyx)",
       "vector_db": "Qdrant (self-hosted)",
       "embeddings": "OpenAI text-embedding-3-small",
       "automation": "n8n 2.4.5 (Community Edition)",
@@ -28,10 +30,10 @@
     }
   },
   "codebase_metrics": {
-    "total_files_changed": 19,
-    "total_lines_added": 2589,
-    "total_lines_deleted": 87,
-    "source_lines": 2436,
+    "total_files_changed": 27,
+    "total_lines_added": 3350,
+    "total_lines_deleted": 200,
+    "source_lines": 3150,
     "files": [
       {
         "path": "src/app/globals.css",
@@ -77,9 +79,57 @@
       },
       {
         "path": "src/components/ChatWidget.tsx",
-        "lines": 46,
+        "lines": 80,
         "category": "component-ai",
-        "description": "n8n AI chat widget with streaming and dark theme"
+        "description": "Custom voice-enabled chat widget (FAB toggle, chat window, voice state management)"
+      },
+      {
+        "path": "src/components/chat/ChatHeader.tsx",
+        "lines": 45,
+        "category": "component-ai",
+        "description": "Chat header with title, close, and reset buttons"
+      },
+      {
+        "path": "src/components/chat/ChatMessages.tsx",
+        "lines": 95,
+        "category": "component-ai",
+        "description": "Scrollable message list with markdown rendering and TTS speaker buttons"
+      },
+      {
+        "path": "src/components/chat/ChatInput.tsx",
+        "lines": 90,
+        "category": "component-ai",
+        "description": "Auto-resize textarea with voice-state mic button and send button"
+      },
+      {
+        "path": "src/components/chat/icons.tsx",
+        "lines": 80,
+        "category": "component-ai",
+        "description": "SVG icon components (Mic, Send, Close, Chat, Speaker, Stop, Spinner, Waveform)"
+      },
+      {
+        "path": "src/hooks/useChat.ts",
+        "lines": 130,
+        "category": "hook",
+        "description": "Chat state management, n8n NDJSON streaming protocol, session persistence"
+      },
+      {
+        "path": "src/hooks/useVoiceRecorder.ts",
+        "lines": 200,
+        "category": "hook",
+        "description": "MediaRecorder capture, STT transcription, TTS progressive playback via MediaSource"
+      },
+      {
+        "path": "src/app/api/voice/stt/route.ts",
+        "lines": 60,
+        "category": "api-route",
+        "description": "OpenAI Whisper STT endpoint with validation and rate limiting"
+      },
+      {
+        "path": "src/app/api/voice/tts/route.ts",
+        "lines": 85,
+        "category": "api-route",
+        "description": "OpenAI TTS endpoint with markdown stripping, truncation, and progressive streaming"
       },
       {
         "path": "src/components/SmoothScroll.tsx",
@@ -420,6 +470,54 @@
       ]
     },
     {
+      "id": "voice_chat",
+      "name": "Voice-Enabled Chat Integration",
+      "hours": 8,
+      "status": "completed",
+      "items": [
+        {
+          "name": "Custom chat component",
+          "hours": 3,
+          "files": [
+            "src/components/ChatWidget.tsx",
+            "src/components/chat/ChatHeader.tsx",
+            "src/components/chat/ChatMessages.tsx",
+            "src/components/chat/ChatInput.tsx",
+            "src/components/chat/icons.tsx",
+            "src/hooks/useChat.ts"
+          ],
+          "status": "completed"
+        },
+        {
+          "name": "Speech-to-Text (STT)",
+          "hours": 2,
+          "files": [
+            "src/app/api/voice/stt/route.ts",
+            "src/hooks/useVoiceRecorder.ts"
+          ],
+          "status": "completed",
+          "notes": "OpenAI Whisper, MediaRecorder with WebM/MP4 fallback, 10MB limit, 60s auto-stop"
+        },
+        {
+          "name": "Text-to-Speech (TTS)",
+          "hours": 2,
+          "files": [
+            "src/app/api/voice/tts/route.ts",
+            "src/hooks/useVoiceRecorder.ts"
+          ],
+          "status": "completed",
+          "notes": "OpenAI TTS (onyx), progressive streaming via MediaSource, markdown stripping, 500-char truncation"
+        },
+        {
+          "name": "n8n streaming protocol integration",
+          "hours": 1,
+          "files": ["src/hooks/useChat.ts"],
+          "status": "completed",
+          "notes": "NDJSON parser for type:item content chunks, session persistence via localStorage"
+        }
+      ]
+    },
+    {
       "id": "seo_geo",
       "name": "SEO/GEO & Performance",
       "hours": 3,
@@ -524,10 +622,10 @@
     {
       "service": "OpenAI API",
       "tier": "Pay-as-you-go",
-      "monthly": 10,
-      "annual": 120,
+      "monthly": 37,
+      "annual": 444,
       "passthrough": true,
-      "notes": "GPT-4o + text-embedding-3-small"
+      "notes": "GPT-4o + embeddings ($10) + Whisper STT (~$18) + TTS (~$9)"
     },
     {
       "service": "n8n",
@@ -551,21 +649,28 @@
       "id": "M1",
       "name": "Research & Architecture",
       "trigger": "Research docs + tech spec delivered",
-      "percentage": 30,
+      "percentage": 25,
       "status": "completed"
     },
     {
       "id": "M2",
       "name": "Development & Infrastructure",
       "trigger": "Site live + AI chatbot operational",
-      "percentage": 40,
+      "percentage": 35,
       "status": "completed"
     },
     {
       "id": "M3",
+      "name": "Voice Integration",
+      "trigger": "Voice chat (STT + TTS) operational",
+      "percentage": 15,
+      "status": "completed"
+    },
+    {
+      "id": "M4",
       "name": "SEO/GEO & Handoff",
       "trigger": "Final delivery + documentation",
-      "percentage": 30,
+      "percentage": 25,
       "status": "completed"
     }
   ],
@@ -576,35 +681,42 @@
       "description": "Initial quote — complete project delivery",
       "delta_hours": 48,
       "delta_sections": 6
+    },
+    {
+      "version": "1.1",
+      "date": "2026-02-18",
+      "description": "Added voice-enabled chat integration (STT + TTS + custom React chat)",
+      "delta_hours": 8,
+      "delta_sections": 1
     }
   ],
   "totals": {
-    "hours": 48,
-    "sections": 6,
+    "hours": 56,
+    "sections": 7,
     "by_tier": {
       "cambodia_sea": {
         "hourly_rate": 75,
-        "tm_total": 3600,
-        "fixed_bid": 4200,
+        "tm_total": 4200,
+        "fixed_bid": 4914,
         "retainer_monthly": 1500,
-        "infra_monthly": 22,
-        "infra_annual": 264
+        "infra_monthly": 49,
+        "infra_annual": 588
       },
       "australia": {
         "hourly_rate": 175,
-        "tm_total": 8400,
-        "fixed_bid": 9800,
+        "tm_total": 9800,
+        "fixed_bid": 11466,
         "retainer_monthly": 3500,
-        "infra_monthly": 22,
-        "infra_annual": 264
+        "infra_monthly": 49,
+        "infra_annual": 588
       },
       "global_us": {
         "hourly_rate": 250,
-        "tm_total": 12000,
-        "fixed_bid": 14000,
+        "tm_total": 14000,
+        "fixed_bid": 16380,
         "retainer_monthly": 5000,
-        "infra_monthly": 22,
-        "infra_annual": 264
+        "infra_monthly": 49,
+        "infra_annual": 588
       }
     }
   },

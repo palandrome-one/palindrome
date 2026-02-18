@@ -17,6 +17,9 @@ Company landing page for **Palindrome Blockchain Consultancy** (palindrome.one) 
 | Language    | TypeScript 5                        |
 | UI          | React 19, custom CSS (no component library) |
 | Styling     | Tailwind CSS 4 (imported but primarily custom CSS in `globals.css`) |
+| AI Chat     | Custom React chat widget with n8n webhook streaming |
+| Voice (STT) | OpenAI Whisper (`whisper-1`) via server-side API route |
+| Voice (TTS) | OpenAI TTS (`tts-1`, voice `onyx`) with progressive streaming |
 | Analytics   | Vercel Web Analytics (`@vercel/analytics`) |
 | Deployment  | Vercel (auto-deploy from GitHub)    |
 | Repo        | `palindrome/` subdirectory, GitHub: palandrome-one/palindrome |
@@ -36,8 +39,15 @@ palindrome.one/
 │   │   │   │   └── page.tsx     # Case studies / portfolio page
 │   │   │   ├── robots.ts        # robots.txt with AI crawler permissions
 │   │   │   ├── sitemap.ts       # sitemap.xml (both pages)
-│   │   │   ├── globals.css      # Full custom stylesheet (~1000 lines)
+│   │   │   ├── api/
+│   │   │   │   └── voice/
+│   │   │   │       ├── stt/route.ts  # Whisper STT endpoint (10MB limit, rate-limited)
+│   │   │   │       └── tts/route.ts  # OpenAI TTS endpoint (progressive streaming, markdown-stripped)
+│   │   │   ├── globals.css      # Full custom stylesheet (~1250 lines)
 │   │   │   └── favicon.ico
+│   │   ├── hooks/
+│   │   │   ├── useChat.ts      # Chat state, n8n NDJSON streaming, session persistence
+│   │   │   └── useVoiceRecorder.ts # MediaRecorder capture, STT transcription, TTS playback
 │   │   └── components/
 │   │       ├── Nav.tsx          # Shared nav with mobile hamburger menu (client component)
 │   │       ├── Footer.tsx       # Shared footer (used on all pages)
@@ -46,7 +56,12 @@ palindrome.one/
 │   │       ├── ScrollReveal.tsx # Intersection Observer reveal animations
 │   │       ├── NavScrollEffect.tsx # Nav background on scroll
 │   │       ├── SmoothScroll.tsx # Smooth scroll (handles #hash and /#hash)
-│   │       └── ChatWidget.tsx   # n8n AI chat widget (streaming enabled)
+│   │       ├── ChatWidget.tsx   # Custom voice-enabled chat (FAB + chat window)
+│   │       └── chat/
+│   │           ├── ChatHeader.tsx   # Title bar with close & reset buttons
+│   │           ├── ChatMessages.tsx # Scrollable messages with markdown rendering & TTS buttons
+│   │           ├── ChatInput.tsx    # Auto-resize textarea, mic button, send button
+│   │           └── icons.tsx        # SVG icon components (Mic, Send, Close, Chat, Speaker, etc.)
 │   └── package.json
 ├── docs/
 │   └── landing-page.html        # Static HTML version (outside git)
@@ -62,7 +77,13 @@ palindrome.one/
 - **Navigation:** All section links use `/#section` format (absolute paths) so they work from any page. `SmoothScroll.tsx` handles both `#hash` and `/#hash` formats — smooth-scrolls on the homepage, normal navigation from other pages.
 - **Animations:** CSS-based scroll reveals (`.reveal` class + Intersection Observer), particle effects, gradient shifting, and hover transitions.
 - **Responsive:** Single breakpoint at 768px. Mobile hamburger menu toggles a fullscreen nav overlay.
-- **AI Chat:** n8n-powered chat widget with streaming responses (`enableStreaming: true` in widget, `responseMode: "streaming"` on Chat Trigger node).
+- **AI Chat:** Custom React chat component (replaced n8n CDN widget) with full voice capability:
+  - **Text chat:** Streams responses via n8n webhook NDJSON protocol (`type: "item"` chunks with `content` field). Session ID persisted in localStorage.
+  - **Voice input (STT):** MediaRecorder captures audio → POST to `/api/voice/stt` → Whisper transcription → auto-sends to chat. Format fallback: `audio/webm;codecs=opus` (Chrome/FF) → `audio/mp4` (Safari). Auto-stops at 60s.
+  - **Voice output (TTS):** Per-message speaker button → POST to `/api/voice/tts` → OpenAI TTS (`tts-1`, voice `onyx`) → progressive audio streaming via MediaSource API (falls back to full-blob playback on Safari). Markdown stripped and text truncated to 500 chars at sentence boundary for fast playback.
+  - **Rate limiting:** Both voice endpoints use in-memory rate limiting (10 req/min per IP).
+  - **Markdown rendering:** Bot messages render headings, bold, italic, numbered/bullet lists, code blocks, and paragraph breaks using a lightweight custom parser (no external dependency).
+  - **Error handling:** Mic permission denied → hides mic button; STT/TTS failures → inline error bar; network errors → fallback bot message.
 - **Static HTML mirror:** `docs/landing-page.html` is a standalone HTML copy of the same design, not tracked in git.
 - **GEO (Generative Engine Optimization):** JSON-LD structured data (Organization, WebSite, ProfessionalService, CreativeWork), Open Graph + Twitter Card meta tags, canonical URLs, `robots.txt` with explicit AI crawler permissions (GPTBot, ClaudeBot, PerplexityBot, etc.), `sitemap.xml`, and `X-Robots-Tag` header with `max-snippet:-1` for unlimited AI text extraction. Semantic `<main>` and `<article>` wrappers help AI parsers distinguish content.
 
@@ -114,6 +135,10 @@ palindrome.one/
 - [x] Point root domain to Vercel (A record → 76.76.21.21)
 - [x] Add n8n AI chat widget with Palindrome-themed dark styling
 - [x] Enable chat streaming (n8n Chat Trigger + widget `enableStreaming`)
+- [x] Replace n8n CDN chat widget with custom React chat component
+- [x] Add voice input (STT) via OpenAI Whisper with MediaRecorder
+- [x] Add voice output (TTS) via OpenAI TTS with progressive streaming
+- [x] Add markdown rendering for bot messages (headings, lists, bold, code)
 - [x] Add case studies / portfolio page (5 case studies)
 - [x] Extract shared Nav and Footer components
 - [x] Update copyright year to 2026
@@ -186,4 +211,13 @@ N8N_PROXY_HOPS=1
 - **Agent:** GPT-4o with system prompt covering all Palindrome services, tech stack, and advisory
 - **Memory:** Window Buffer Memory (20 messages)
 - **RAG:** Qdrant vector store (`palindrome_docs` collection) with OpenAI embeddings, exposed as agent tool
-- **Widget:** `@n8n/chat` v1.9.0 via CDN, `enableStreaming: true` in `createChat()` config
+- **Widget:** Custom React chat component (replaced `@n8n/chat` CDN widget). Streams via NDJSON protocol, voice-enabled (STT + TTS).
+
+### Voice Integration
+
+- **Dependencies:** `openai` npm package (server-side only, not bundled in client JS)
+- **Environment:** `OPENAI_API_KEY` in `.env.local` (local) and Vercel environment settings (production)
+- **STT endpoint:** `POST /api/voice/stt` — accepts audio FormData, returns `{ text }`. Max 10MB, rate-limited 10 req/min/IP.
+- **TTS endpoint:** `POST /api/voice/tts` — accepts `{ text }`, streams `audio/mpeg`. Strips markdown, truncates to 500 chars at sentence boundary. Rate-limited 10 req/min/IP.
+- **Client playback:** Uses MediaSource API for progressive playback (Chrome/FF), falls back to full-blob Audio playback (Safari).
+- **Cost estimate:** ~$27/mo for 1K users (avg 3 voice interactions, 15s audio each, 200 char responses)

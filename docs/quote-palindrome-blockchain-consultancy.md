@@ -21,10 +21,11 @@ Palindrome Blockchain Consultancy engaged a full-stack development sprint to del
 - **Market research and content strategy** — 4 proprietary research documents (18MB) covering blockchain gaming market analysis, tech stack blueprints, anti-cheat/monetization frameworks, and global finance infrastructure
 - **Production website** — Next.js 16 application with 9 service offerings, 6 advisory specializations, 5 detailed case studies, and responsive design across all breakpoints
 - **AI-powered lead qualification** — RAG chatbot trained on proprietary research using GPT-4o, Qdrant vector search, and n8n automation, providing 24/7 AI-driven client engagement
+- **Voice-enabled conversational AI** — Custom chat with speech-to-text (OpenAI Whisper) and text-to-speech (OpenAI TTS) for hands-free voice interaction, progressive audio streaming, and markdown-rendered responses
 - **Enterprise infrastructure** — Multi-provider deployment (Vercel, DigitalOcean, Namecheap) with SSL, DKIM email authentication, reverse proxy routing, and CI/CD
 - **Generative Engine Optimization (GEO)** — Structured data, AI crawler permissions, and semantic markup ensuring discoverability by ChatGPT, Claude, Perplexity, and other AI search engines
 
-**Total Scope:** 19 files | 2,589 lines | 48 billable hours
+**Total Scope:** 27 files | 3,350+ lines | 56 billable hours
 
 ---
 
@@ -85,7 +86,18 @@ Palindrome Blockchain Consultancy engaged a full-stack development sprint to del
 | Chat widget integration | @n8n/chat v1.9.0 CDN embed, dark theme styling, streaming mode configuration | 1 |
 | Webhook debugging | 3 critical bugs resolved: webhook 404 (missing `N8N_WEBHOOK_BASE_URL`), Chat Trigger `public` property, textarea styling | 1.5 |
 
-### 2.6 SEO/GEO & Performance — 3 hours
+### 2.6 Voice-Enabled Chat Integration — 8 hours
+
+| Item | Description | Hours |
+|------|-------------|-------|
+| Custom chat component | Replace n8n CDN widget with full React chat component: FAB toggle, chat window, message list with markdown rendering, auto-resize textarea, voice-state mic button | 3 |
+| Speech-to-Text (STT) | Server-side API route (`/api/voice/stt`), OpenAI Whisper integration, MediaRecorder with format fallback (WebM/MP4), 10MB limit, 60s auto-stop, rate limiting | 2 |
+| Text-to-Speech (TTS) | Server-side API route (`/api/voice/tts`), OpenAI TTS (voice: onyx), progressive audio streaming via MediaSource API, markdown stripping, 500-char truncation at sentence boundary | 2 |
+| n8n streaming protocol | NDJSON stream parser for n8n webhook responses (`type: "item"` chunks with `content` field), session persistence via localStorage, error handling for network failures | 1 |
+
+**Deliverables:** 8 new files (2 API routes, 2 hooks, 4 chat components), 2 modified files (ChatWidget.tsx, globals.css), OpenAI dependency
+
+### 2.7 SEO/GEO & Performance — 3 hours
 
 | Item | Description | Hours |
 |------|-------------|-------|
@@ -99,18 +111,26 @@ Palindrome Blockchain Consultancy engaged a full-stack development sprint to del
 
 ## 3. Deliverables Inventory
 
-### Source Code (19 files, 2,589 lines added)
+### Source Code (27 files, 3,350+ lines added)
 
 | File | Lines | Category |
 |------|-------|----------|
-| `src/app/globals.css` | 1,250 | Styling |
+| `src/app/globals.css` | 1,500+ | Styling |
 | `src/app/page.tsx` | 353 | Page — Homepage |
 | `src/app/case-studies/page.tsx` | 280 | Page — Case Studies |
 | `implementation.md` | 189 | Documentation |
 | `src/components/JsonLd.tsx` | 167 | Component — SEO |
 | `src/app/layout.tsx` | 62 | Layout |
 | `src/components/Nav.tsx` | 61 | Component — Navigation |
-| `src/components/ChatWidget.tsx` | 46 | Component — AI Chat |
+| `src/components/ChatWidget.tsx` | 80 | Component — Voice-enabled AI Chat |
+| `src/components/chat/ChatHeader.tsx` | 45 | Component — Chat Header |
+| `src/components/chat/ChatMessages.tsx` | 95 | Component — Messages with Markdown |
+| `src/components/chat/ChatInput.tsx` | 90 | Component — Input with Voice Controls |
+| `src/components/chat/icons.tsx` | 80 | Component — SVG Icons |
+| `src/hooks/useChat.ts` | 130 | Hook — Chat State & Streaming |
+| `src/hooks/useVoiceRecorder.ts` | 200 | Hook — Voice Recording & Playback |
+| `src/app/api/voice/stt/route.ts` | 60 | API Route — Speech-to-Text |
+| `src/app/api/voice/tts/route.ts` | 85 | API Route — Text-to-Speech |
 | `src/components/SmoothScroll.tsx` | 35 | Component — UX |
 | `src/components/Particles.tsx` | 29 | Component — Animation |
 | `src/app/robots.ts` | 24 | SEO — Robots |
@@ -183,7 +203,7 @@ Palindrome Blockchain Consultancy engaged a full-stack development sprint to del
 
 **20 commits** across 2 days | **8+ hours** of git-tracked development
 
-> **Note:** Git captures ~8 hours of commit activity on Feb 18. Research (Feb 7-13), static prototype design, n8n workflow configuration (browser-based), DNS/email/Vercel setup (provider dashboards), Qdrant deployment (server-side Docker), and content writing are not captured in git. **48 hours** represents true billable effort across all phases.
+> **Note:** Git captures ~8 hours of commit activity on Feb 18. Research (Feb 7-13), static prototype design, n8n workflow configuration (browser-based), DNS/email/Vercel setup (provider dashboards), Qdrant deployment (server-side Docker), and content writing are not captured in git. **56 hours** represents true billable effort across all phases.
 
 ---
 
@@ -191,18 +211,18 @@ Palindrome Blockchain Consultancy engaged a full-stack development sprint to del
 
 ### Time & Materials (T&M)
 
-| Tier | Hourly Rate | 48 Hours T&M | Fixed Bid (+17%) | Monthly Retainer (20 hrs) |
+| Tier | Hourly Rate | 56 Hours T&M | Fixed Bid (+17%) | Monthly Retainer (20 hrs) |
 |------|-------------|--------------|-------------------|---------------------------|
-| **Cambodia / SEA** | $75/hr | **$3,600** | **$4,200** | $1,500/mo |
-| **Australia** | $175/hr | **$8,400** | **$9,800** | $3,500/mo |
-| **Global / US** | $250/hr | **$12,000** | **$14,000** | $5,000/mo |
+| **Cambodia / SEA** | $75/hr | **$4,200** | **$4,914** | $1,500/mo |
+| **Australia** | $175/hr | **$9,800** | **$11,466** | $3,500/mo |
+| **Global / US** | $250/hr | **$14,000** | **$16,380** | $5,000/mo |
 
 **Pricing notes:**
 - **T&M** — Billed against actual hours with weekly timesheets
 - **Fixed Bid** — 17% premium covers scope risk; includes up to 10% scope change without renegotiation
 - **Monthly Retainer** — 20 hours/month for ongoing development, maintenance, and support; unused hours do not roll over
 
-### Infrastructure Passthrough Costs (~$22/month)
+### Infrastructure Passthrough Costs (~$49/month)
 
 These are at-cost passthroughs with no markup:
 
@@ -212,10 +232,10 @@ These are at-cost passthroughs with no markup:
 | DigitalOcean (shared) | ~$8 | ~$96 | Shared droplet across tenants |
 | Namecheap domain | ~$1 | ~$12 | .one TLD renewal |
 | Namecheap Private Email | ~$3 | ~$36 | 1 mailbox + catch-all |
-| OpenAI API (chatbot) | ~$10 | ~$120 | GPT-4o + embeddings usage |
+| OpenAI API (chatbot + voice) | ~$37 | ~$444 | GPT-4o + embeddings + Whisper STT (~$18) + TTS (~$9) |
 | n8n (self-hosted) | $0 | $0 | Community Edition |
 | Qdrant (self-hosted) | $0 | $0 | Docker container |
-| **Total** | **~$22** | **~$264** | |
+| **Total** | **~$49** | **~$588** | |
 
 ---
 
@@ -223,10 +243,11 @@ These are at-cost passthroughs with no markup:
 
 | Milestone | Trigger | % | Cambodia | Australia | Global |
 |-----------|---------|---|----------|-----------|--------|
-| **M1 — Research & Architecture** | Research docs + tech spec delivered | 30% | $1,080 | $2,520 | $3,600 |
-| **M2 — Development & Infrastructure** | Site live + AI chatbot operational | 40% | $1,440 | $3,360 | $4,800 |
-| **M3 — SEO/GEO & Handoff** | Final delivery + documentation | 30% | $1,080 | $2,520 | $3,600 |
-| **Total** | | 100% | **$3,600** | **$8,400** | **$12,000** |
+| **M1 — Research & Architecture** | Research docs + tech spec delivered | 25% | $1,050 | $2,450 | $3,500 |
+| **M2 — Development & Infrastructure** | Site live + AI chatbot operational | 35% | $1,470 | $3,430 | $4,900 |
+| **M3 — Voice Integration** | Voice chat (STT + TTS) operational | 15% | $630 | $1,470 | $2,100 |
+| **M4 — SEO/GEO & Handoff** | Final delivery + documentation | 25% | $1,050 | $2,450 | $3,500 |
+| **Total** | | 100% | **$4,200** | **$9,800** | **$14,000** |
 
 *Fixed-bid pricing follows the same milestone split applied to the fixed-bid total.*
 
@@ -236,7 +257,7 @@ These are at-cost passthroughs with no markup:
 
 1. **Written approval required** — All scope changes must be documented in writing (email or project management tool) before work begins
 2. **Impact assessment** — Each change request will include estimated hours, cost impact, and timeline effect within 24 hours
-3. **Hourly overflow** — Work exceeding the quoted 48 hours is billed at the applicable tier rate on a T&M basis
+3. **Hourly overflow** — Work exceeding the quoted 56 hours is billed at the applicable tier rate on a T&M basis
 4. **Emergency rate** — Out-of-hours or rush requests (< 24-hour turnaround) are billed at **1.5x** the standard hourly rate
 5. **Scope threshold** — Fixed-bid engagements include up to 10% scope change without renegotiation; beyond 10% triggers a formal change order
 
@@ -270,7 +291,18 @@ This website is not merely a marketing asset — it is a **live technical demons
 
 The RAG chatbot represents a **24/7 AI-powered lead qualification system** operating at the intersection of two high-demand verticals. Trained on 18MB of proprietary blockchain gaming research (129 document chunks), it can answer detailed technical questions about tokenomics, anti-cheat architecture, and infrastructure design — pre-qualifying prospects before they reach a human consultant. This is not a generic FAQ bot; it has domain expertise.
 
-### 9.3 Tokenized Asset Foundation
+### 9.3 Voice-First Conversational Interface
+
+The voice integration transforms the website from a text-only chat tool into a **conversational AI advisor**. Key differentiators:
+- **Speech-to-text** via OpenAI Whisper enables hands-free interaction — prospects can describe complex technical requirements verbally rather than typing
+- **Text-to-speech** via OpenAI TTS (progressive streaming) provides immediate audio feedback, creating an experience closer to speaking with a human consultant
+- **No client-side dependencies** — uses native browser APIs (MediaRecorder, MediaSource, Audio), keeping bundle size unchanged
+- **Cross-browser support** — format fallback (WebM → MP4) and playback fallback (MediaSource → blob) ensure compatibility across Chrome, Firefox, Safari, and mobile browsers
+- **Cost-effective** — estimated ~$27/month for 1K users with rate limiting (10 req/min per IP) to prevent abuse
+
+This positions Palindrome as an AI-native consultancy — the website itself demonstrates the kind of intelligent, conversational infrastructure the company builds for clients.
+
+### 9.4 Tokenized Asset Foundation
 
 Architecture decisions made during this build — CSS custom properties for theming, component extraction patterns, JSON-LD structured data, App Router with dynamic routing — reduce future development cost by an estimated **30-40%** for planned features:
 - Token dashboard interfaces
