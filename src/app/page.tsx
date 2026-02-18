@@ -144,6 +144,7 @@ export default function Home() {
 
       <Nav />
 
+      <main>
       {/* HERO */}
       <section className="hero">
         <Particles />
@@ -344,6 +345,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
     </>

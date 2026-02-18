@@ -6,9 +6,33 @@ import NavScrollEffect from "@/components/NavScrollEffect";
 import SmoothScroll from "@/components/SmoothScroll";
 
 export const metadata: Metadata = {
-  title: "Case Studies — Palindrome Blockchain Consultancy",
+  title: "Case Studies",
   description:
     "Portfolio of blockchain gaming infrastructure engagements — sovereign chains, invisible onboarding, cross-chain marketplaces, tokenomics engines, and ZK anti-cheat systems.",
+  alternates: {
+    canonical: "/case-studies",
+  },
+  openGraph: {
+    title: "Case Studies — Palindrome Blockchain Consultancy",
+    description:
+      "Portfolio of blockchain gaming infrastructure engagements — sovereign chains, invisible onboarding, cross-chain marketplaces, tokenomics engines, and ZK anti-cheat systems.",
+    url: "https://www.palindrome.one/case-studies",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Palindrome Blockchain Consultancy — Case Studies",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Case Studies — Palindrome Blockchain Consultancy",
+    description:
+      "Portfolio of blockchain gaming infrastructure engagements — sovereign chains, invisible onboarding, cross-chain marketplaces, tokenomics engines, and ZK anti-cheat systems.",
+    images: ["/og-image.png"],
+  },
 };
 
 const caseStudies = [
@@ -114,6 +138,25 @@ const caseStudies = [
   },
 ];
 
+function CaseStudyJsonLd() {
+  const items = caseStudies.map((cs) => ({
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: cs.title,
+    description: cs.subtitle,
+    author: { "@id": "https://www.palindrome.one/#organization" },
+    about: cs.tags.map((tag) => ({ "@type": "Thing", name: tag })),
+    text: `Challenge: ${cs.challenge} Solution: ${cs.solution}`,
+  }));
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(items) }}
+    />
+  );
+}
+
 export default function CaseStudies() {
   return (
     <>
@@ -121,6 +164,7 @@ export default function CaseStudies() {
       <NavScrollEffect />
       <SmoothScroll />
       <Nav />
+      <CaseStudyJsonLd />
 
       {/* HERO */}
       <section className="cs-hero">
@@ -163,7 +207,7 @@ export default function CaseStudies() {
 
       {/* DETAIL SECTIONS */}
       {caseStudies.map((cs) => (
-        <section key={cs.id} id={cs.id} className="cs-detail">
+        <article key={cs.id} id={cs.id} className="cs-detail">
           <div className="cs-detail-label reveal">Case Study {cs.number}</div>
           <div className="reveal" style={{ marginBottom: "0.5rem" }}>
             <span className={`cs-badge ${cs.type}`}>
@@ -197,7 +241,7 @@ export default function CaseStudies() {
               </div>
             ))}
           </div>
-        </section>
+        </article>
       ))}
 
       {/* CTA */}
